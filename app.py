@@ -18,7 +18,7 @@ model=genai.GenerativeModel("gemini-2.0-flash")
 # Streamlit configuration
 st.set_page_config(page_title="Gemini Chatbot", page_icon=":mag_right:", layout="centered")
 
-st.title("Retrieval-Based Chatbot with Gemini")
+st.title("Retrieval-Based Chatbot with Gemini🤖")
 
 if "history" not in st.session_state:
     st.session_state.history = []
@@ -61,7 +61,7 @@ Bot:
 """
     return prompt
 
-st.sidebar.title("Upload PDF")
+st.sidebar.title("Upload PDF📁")
 uploaded_file=st.sidebar.file_uploader("Upload a Text or PDF file", type=["txt", "pdf"])
 
 def process_file(uploaded_file, file_type):
@@ -82,12 +82,12 @@ def process_file(uploaded_file, file_type):
 if uploaded_file:
     file_type=uploaded_file.type.split("/")[-1]
     process_file(uploaded_file, file_type)
-    st.sidebar.success("File processed successfully!")
+    st.sidebar.success("File processed successfully!✅")
 
 # Chat Interface
 
-st.subheader("Ask anything:")
-user_query=st.text_input("Your Question:")
+st.subheader("Ask anything👀:")
+user_query=st.text_input("Your Question❓:")
 
 if st.button("Ask") and user_query and "vectorizer" in st.session_state:
     prompt=build_prompt(user_query)
@@ -95,7 +95,7 @@ if st.button("Ask") and user_query and "vectorizer" in st.session_state:
         response=model.generate_content(prompt)
         bot_reply=response.text.strip()
         st.session_state.history.append((user_query, bot_reply))
-        st.success("Response generated successfully!")
+        st.success("Response generated successfully!✅")
     except Exception as e:
         st.error(f"Error generating response: {e}")
 
